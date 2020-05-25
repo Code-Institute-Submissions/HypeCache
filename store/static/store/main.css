@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+body, html {
+    height: 100%;
+    width: 100%;
+}
+header{
+    height: 491px;
+}
+*{
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+#id_username{
+    text-transform: initial;
+}
+
+.img_container{
+    height: 350px;
+    width: 350px;
+}
+    /*? Nav Bar  */
+nav.wrapper{
+display: grid;
+grid-template-columns: .4fr 1fr  .3fr .3fr;
+grid-template-rows:110px ;
+align-items:center;
+background: rgba(255, 255, 255, 0.82);
+}
+
+
+
+/* ?For Authenticated Users */
+nav.wrapper_auth{
+    display: grid;
+    grid-template-columns: .3fr .3fr .3fr .3fr .1fr;
+    grid-template-rows:110px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.82);
+    }
+nav a{
+    transition: .5s;
+    
+}
+nav a:hover{
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    opacity: .67;
+}
+.nav_text,.banner_text{
+    font-family: Oswald;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 39px;
+    line-height: 58px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.155em;
+    text-transform: uppercase;
+    color: #000000;
+    opacity: 0.67;}
+
+    /* ?Banner */
+    .banner{
+        height: 491px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        z-index: -1;
+        padding-top: 110px;
+    }
+
+    /* todo: MAKE FONT RESPONSIVE! (use code from other project) */
+    .banner_text h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% );
+    color: white;
+    letter-spacing: 0.385em;
+    font-weight: 500;
+    font-size: 100px;
+    }
+    .banner_text{
+        opacity: 1;
+    }
+
+    .content-section{
+        margin-top: 3vh;
+        margin-bottom: 5vh;
+    }
+
+    .alert{
+        text-align: center;
+        top: 110px;
+    }
+
+    /*? Home page */
+article.wrapper{
+    display: grid;
+    grid-template-columns: repeat(3,1fr );
+    grid-template-rows:300px ;
+    align-items: center;
+    
+    text-align: center;
+}
+.filter{
+    width: 100%;
+    height: 105px;
+    margin-top: 5vh;
+    display: grid;
+    grid-template-columns: repeat(6,1fr );
+    grid-template-rows:110px ;
+    align-items: center;
+}
+.product_card{
+    height: 300px;
+    width: 300px;
+    margin-top: 10vh;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    text-align: center;
+    /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+}
+
+.hover_desc{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.692);
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+
+
+.hover_desc p{
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  letter-spacing: 0.155em;
+  font-weight: 300;
+/* background-blend-mode: hard-light; */
+}
+
+.product_card img{
+    height: 100%;
+    width: auto;
+}
+
+/* ?SEARCH BAR  */
+.filter input[type=text] {
+    padding: 10px 150px 10px 10px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    border-bottom: 2px solid black;
+}
+
+  /*?-------------------------------Product Detail View */
+.detail{
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+.detail_img{
+    text-align: center;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.155em;
+}
+.detail_img img{
+    height: 100%;
+    width: auto;
+}
+
+.detail_img p{
+font-weight: 300;
+font-size: 12px;
+letter-spacing: 0.155em;
+margin-top:1vh ;
+margin-bottom: 0%;
+}
+
+.detail_info{
+    text-align: center;
+}
+.detail_info h2{
+    font-weight: 300;
+    font-size: 26px;
+    letter-spacing: 0.155em;
+    margin-top: 1vh;
+}
+.detail_info p{
+    font-weight: 300;
+    font-size: 12px;
+    letter-spacing: 0.155em;
+    margin-bottom: 0.5vh;
+}
+.detail_info input{
+    padding: 10px 10px 10px 10px;
+    width: 35px;
+    border: none;
+    margin-bottom: 8px;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+.detail_info .desc{
+    margin-top: 2vh;
+}
+.detail_info .btn-group{
+    margin-top: 2vh;
+    background: black;
+}
+.detail_info .btn-group .btn{
+    color: white;
+    letter-spacing: 0.155em;
+text-transform: uppercase;
+font-weight: 300;
+font-size: 18px;
+}
+/* ?remove arrows Chrome, Safari, Edge, Opera */
+.detail_info input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* ? Remove arrows Firefox */
+.detail_info input[type=number] {
+    -moz-appearance: textfield;
+  }

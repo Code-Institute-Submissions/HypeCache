@@ -1,0 +1,42 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{product.name}}{% endblock title %}
+
+
+{% block content %}
+<div class="row detail">
+    <div class="col-4 detail_img">
+
+        {% if user.is_staff %}
+        <div>
+            <a class="btn btn-outline-info btn-sm mb-3" href="{%url 'product-update' object.id%}">Update</a>
+            <a class="btn btn-outline-danger btn-sm mb-3" href="{%url 'product-delete' object.id%}">Delete</a>
+        </div>
+        {% endif %}
+
+        <div class="img_container">
+            <img class='img-fluid' src="{{product.image.url}}" alt="">
+        </div>
+        <p>colour: {{product.colour}}</p>
+        <p>brand: {{product.brand}}</p>
+        <p>size: {{product.size}}</p>
+        <p>sku: </p>
+    </div>
+
+    <div class="col-8 detail_info">
+        <p>({{product.get_condition_display}})</p>
+        <h2>{{product.name}}</h2>
+        <h2>£{{product.price}}</h3>
+            <p>(Shipping included)</p>
+            <h2>Quantity</h2>
+            <input type="number" name="user_quantity" id="user_quantity" min='1' max='{{product.in_stock}}' value="1">
+            <p>instock: {{product.in_stock}}</p>
+            <p class="desc">{{product.description}}</p>
+            <div class="btn-group">
+                <button class="btn">Add to cart</button>
+            </div>
+    </div>
+</div>
+
+
+{% endblock content %}

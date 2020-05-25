@@ -1,0 +1,62 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}HypeCache{% endblock title %}
+
+{% block content %}
+<!-- ? Filter -->
+<div class="filter border-top border-bottom row">
+    <a href="#">
+        <img src="{% static 'store/images/bottoms.png' %}" alt="">
+    </a>
+    <a href="#">
+        <img src="{% static 'store/images/outerwear.png' %}" alt="">
+    </a>
+    <a href="#">
+        <img src="{% static 'store/images/tshirt.png' %}" alt="">
+    </a>
+    <a href="#">
+        <img src="{% static 'store/images/shoes.png' %}" alt="">
+    </a>
+    <a href="#">
+        <img src="{% static 'store/images/skateboard.png' %}" alt="">
+    </a>
+    <!-- ?Search Bar -->
+    <div class="searchBox">
+        <input class="searchInput" type="text" name="" placeholder="Search...">
+    </div>
+
+</div>
+<!-- ? Product For Loop -->
+<article class="wrapper">
+    {% for product in products  %}
+
+    <div class="product_card img_container">
+
+        <a href="{% url 'product-detail' product.id %}">
+            <div class="hover_desc">
+                <p>
+                    {{product.name}}
+                    <br>
+                    <br>Price: {{product.price}}
+                    <br>Condition: {{product.get_condition_display}}
+                    <br>Size: {{product.size}}
+                    <br>Colour: {{product.colour}}
+                </p>
+            </div>
+            <img src="{{product.image.url}}" class="rounded img-fluid">
+        </a>
+
+    </div>
+
+    {% endfor %}
+</article>
+
+<div class="row ">
+    <div class="col-12 text-center mt-5 mb-5">
+        <button class="btn btn-outline-dark btn-lg">
+            VIEW MORE
+        </button>
+    </div>
+</div>
+
+{% endblock content %}
