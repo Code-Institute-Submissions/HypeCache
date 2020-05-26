@@ -24,9 +24,12 @@ from store.views import (
     ProductDetailView,
     ProductUpdateView,
     ProductDeleteView,
+    ProductListView,
+    FilterListView,
     )
 from django.contrib.admin.views.decorators import staff_member_required
 from users import views as user_views 
+from store import views as store_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,6 +41,8 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
     path('product/<int:pk>/update/', ProductUpdateView.as_view(), name='product-update'),
     path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product-delete'),
+
+    path('search/<str:category>/', FilterListView.as_view() ,name='product-filter'),
 
 
     # ? USERS

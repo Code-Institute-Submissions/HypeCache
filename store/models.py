@@ -22,17 +22,17 @@ class Product(models.Model):
         ('G','Good'),
         ('USE','Heavily Used'),
     )
-    CATAGORY_CODE=(
-        ('LOW','Bottoms'),
-        ('HIGH','Tops'),
-        ('OUT','Outerwear'),
-        ('SHOE','Shoes'),
-        ('MISC','Accessories and Misc')
+    CATEGORY_CODE=(
+        ('lower','Bottoms'),
+        ('tops','Tops'),
+        ('outerwear','Outerwear'),
+        ('shoes','Shoes'),
+        ('misc','Accessories and Misc')
     )
     name = models.CharField(max_length=200, null=True)
     image = models.ImageField(upload_to='product_pics')
     condition=models.CharField(null=True,choices=CONDITION_CODE,max_length=5)
-    catagory=models.CharField(null=True,choices=CATAGORY_CODE,max_length=5)
+    category=models.CharField(null=True,choices=CATEGORY_CODE,max_length=10)
     brand= models.CharField(max_length=200, null=True,blank=True)
     description =models.TextField(null=True,blank=True)
     price = models.FloatField()
