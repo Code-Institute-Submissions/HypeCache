@@ -34,7 +34,7 @@
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="{% url 'product-create' %}" class="nav-link nav_text">new post</a>
             <a href="{%url 'profile'%}" class="nav-link nav_text">profile</a>
-            <a href="#" class="nav-link nav_text">cart()</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">cart()</a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
             </a>
@@ -44,7 +44,7 @@
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="" class="nav-link nav_text">sell with us</a>
             <a href="{%url 'profile'%}" class="nav-link nav_text">profile</a>
-            <a href="#" class="nav-link nav_text">cart()</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">cart()</a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
             </a>
@@ -55,7 +55,7 @@
             <div class="{%url 'home'%}"><a href="" class="nav-link nav_text">home</a></div>
             <div class=""></div>
             <div class=""><a href="{%url 'login'%}" class="nav-link nav_text ">login</a></div>
-            <div class=""> <a href="" class="nav-link nav_text ">Cart(1)</a></div>
+            <div class=""> <a href="{%url 'cart'%}" class="nav-link nav_text ">Cart(1)</a></div>
 
         </nav>
         {% endif %}

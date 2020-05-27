@@ -37,13 +37,14 @@ urlpatterns = [
 
     # ? STORE
     path('',include('store.urls') ),
+
     path('product/new/', staff_member_required(ProductCreateView.as_view(), login_url='login'), name='product-create'),
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
     path('product/<int:pk>/update/', ProductUpdateView.as_view(), name='product-update'),
     path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product-delete'),
 
     path('search/<str:category>/', FilterListView.as_view() ,name='product-filter'),
-
+    path('cart/', store_views.cart ,name='cart'),
 
     # ? USERS
     path('register/', user_views.register,name='register'),

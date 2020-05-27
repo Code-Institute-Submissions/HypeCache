@@ -37,7 +37,7 @@
                 <p>
                     {{product.name}}
                     <br>
-                    <br>Price: {{product.price}}
+                    <br>Price: {{product.price|floatformat:2}}
                     <br>Condition: {{product.get_condition_display}}
                     <br>Size: {{product.size}}
                     <br>Colour: {{product.colour}}

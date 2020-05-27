@@ -26,7 +26,7 @@
     <div class="col-8 detail_info">
         <p>({{product.get_condition_display}})</p>
         <h2>{{product.name}}</h2>
-        <h2>£{{product.price}}</h3>
+        <h2>£{{product.price|floatformat:2}}</h3>
             <p>(Shipping included)</p>
             <h2>Quantity</h2>
             <input type="number" name="user_quantity" id="user_quantity" min='1' max='{{product.in_stock}}' value="1">

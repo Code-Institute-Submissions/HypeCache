@@ -202,7 +202,7 @@ margin-bottom: 0%;
     letter-spacing: 0.155em;
     margin-bottom: 0.5vh;
 }
-.detail_info input{
+.detail_info,.cart_quantity input{
     padding: 10px 10px 10px 10px;
     width: 35px;
     border: none;
@@ -225,12 +225,52 @@ font-weight: 300;
 font-size: 18px;
 }
 /* ?remove arrows Chrome, Safari, Edge, Opera */
-.detail_info input::-webkit-outer-spin-button,
+.detail_info,.cart_quantity input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 /* ? Remove arrows Firefox */
-.detail_info input[type=number] {
+.detail_info,.cart_quantity input[type=number] {
     -moz-appearance: textfield;
-  }
+}
+
+/* ? CART PAGE */
+.cart_row p,h2,h3,h4,h5{
+    letter-spacing: 0.155em;
+    text-align: center;
+}
+.cart_row h2{
+    font-weight: 500;
+    font-size: 41px;
+}
+
+.cart_row h4{
+    font-weight: 300;
+    font-size: 12px;
+}
+
+.cart_row h5{
+    height: 8vh;
+    line-height: 8vh;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cart_quantity{
+    text-align: center;
+}
+.cart_quantity input{
+    transform: translateY(40%);
+}
+
+/* ? Payment Area */
+.cart_row .bg-secondary{
+    width: 8vw;
+    height: 3vh;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.payment_col{
+    margin-top: 6vh;
+}

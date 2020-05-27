@@ -9,7 +9,7 @@ from django.views.generic import (
     )
 import django_filters
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from .models import Product
+from .models import *
 
 # Create your views here.
 # ? HOME View
@@ -18,6 +18,20 @@ class ProductListView(ListView):
     template_name = "store/home.html"
     context_object_name='products'
     ordering = ['-date_posted']
+
+# ? CART View
+def cart(request):
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created=Order.objects.get_or_create(customer=customer, confirmed=False)
+        items = order.orderitem_set.all()
+    else:
+        items=[]
+        order={'get_cart_total':0,'get_cart_items':0}
+
+    context={'items':items,'order':order}
+    return render(request,'store/cart.html',context)
 
 
 

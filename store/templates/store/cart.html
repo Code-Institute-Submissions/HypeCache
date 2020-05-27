@@ -1,0 +1,91 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+
+{% block content %}
+
+<div class="row cart_row">
+    <div class="col-8">
+        <h2 class="m-3 mb-4">Cart</h2>
+        <div class="row">
+            <div class="col-6 pl-0 pr-0">
+                <h4>Item</h4>
+                <div class="border-bottom border-dark"></div>
+            </div>
+            <div class="col-2 pl-0 pr-0">
+                <h4>Size</h4>
+                <div class="border-bottom border-dark"></div>
+            </div>
+            <div class="col-2 pl-0 pr-0">
+                <h4>Total Price</h4>
+                <div class="border-bottom border-dark"></div>
+            </div>
+            <div class="col-1 pl-0 pr-0">
+                <h4>QTY.</h4>
+                <div class="border-bottom border-dark"></div>
+            </div>
+            <div class="col-1 pl-0 pr-0">
+                <h4>Remove</h4>
+                <div class="border-bottom border-dark"></div>
+            </div>
+        </div>
+        <!--? FOR LOOP Starts here -->
+
+        {% for item in items %}
+        <div class="row">
+            <div class="col-6 pl-0 pr-0 border-bottom border-dark">
+                <h5>{{item.product.name}}</h5>
+            </div>
+            <div class="col-2 pl-0 pr-0 border-bottom border-dark">
+                <h5 class="align-middle">{{item.product.size}}</h5>
+            </div>
+            <div class="col-2 pl-0 pr-0 border-bottom border-dark">
+                <h5>{{item.get_total|floatformat:2}}</h5>
+            </div>
+            <div class="col-1 pl-0 pr-0 cart_quantity border-bottom border-dark">
+                <input type="number" name="user_quantity" id="user_quantity" min='1' max='' value="{{item.quantity}}">
+            </div>
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark">
+                <h5 class="text-danger">x</h5>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+    <!--? ENDS HERE -->
+    <!--? Payment Section  -->
+    <!-- ! Dummy Info, Must be changed -->
+    <div class="col-3 payment_col ml-5">
+        <h3 class=" text-center">Payment</h3>
+        <div class="row">
+            <div class="col-10 offset-1 bg-secondary"></div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1 bg-secondary"></div>
+        </div>
+        <div class="row">
+            <div class="col-5 offset-1">
+                <p>Items</p>
+            </div>
+            <div class="col-5 text-right">
+                <p>Total</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 offset-1">
+                <p>{{order.get_cart_items}}</p>
+            </div>
+            <div class="col-5 text-right">
+                <p>{{order.get_cart_total|floatformat:2}} GBP</p>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
