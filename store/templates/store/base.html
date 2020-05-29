@@ -32,11 +32,14 @@
 
 <body>
     <header>
+        <!-- ? NAV BAR FOR SEPERATE USERS -->
         {% if user.is_staff %}
         <nav class="fixed-top wrapper_auth">
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="{% url 'product-create' %}" class="nav-link nav_text">new post</a>
-            <a href="{%url 'profile'%}" class="nav-link nav_text">profile</a>
+            <div>
+                <h2>Staff - {{user.username}}</h2>
+            </div>
             <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
@@ -46,7 +49,9 @@
         <nav class="fixed-top wrapper_auth">
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="" class="nav-link nav_text">sell with us</a>
-            <a href="{%url 'profile'%}" class="nav-link nav_text">profile</a>
+            <div>
+                <h2>Welcome, {{user.username}}</h2>
+            </div>
             <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">

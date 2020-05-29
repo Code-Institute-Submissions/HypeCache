@@ -29,12 +29,10 @@ align-items:center;
 background: rgba(255, 255, 255, 0.82);
 }
 
-
-
 /* ?For Authenticated Users */
 nav.wrapper_auth{
     display: grid;
-    grid-template-columns: .3fr .3fr .3fr .3fr .1fr;
+    grid-template-columns: .2fr .2fr .5fr .1fr .1fr;
     grid-template-rows:110px;
     align-items: center;
     background: rgba(255, 255, 255, 0.82);

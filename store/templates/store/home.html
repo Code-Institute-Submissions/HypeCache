@@ -29,10 +29,12 @@
 <!-- ? Product For Loop -->
 <article class="wrapper">
     {% for product in products  %}
-
+    {% if product.for_sale or user.is_staff %}
     <div class="product_card img_container">
 
         <a href="{% url 'product-detail' product.id %}">
+
+            {% if product.for_sale %}
             <div class="hover_desc">
                 <p>
                     {{product.name}}
@@ -43,12 +45,20 @@
                     <br>Colour: {{product.colour}}
                 </p>
             </div>
+            {% else %}
+            <div class="hover_desc">
+                <p>NOT for sale</p>
+            </div>
+
+            {% endif %}
+
             <img src="{{product.image.url}}" class="rounded img-fluid">
         </a>
 
     </div>
-
+    {% endif %}
     {% endfor %}
+
 </article>
 
 <div class="row ">

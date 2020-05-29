@@ -29,13 +29,17 @@ def cart(request):
         customer = request.user.customer
         order, created=Order.objects.get_or_create(customer=customer, confirmed=False)
         items = order.orderitem_set.all()
+        try:
+            address = ShippingAddress.objects.get(customer=customer)
+        except:
+            address=None
     else:
         items=[]
         order={'get_cart_total':0,'get_cart_items':0}
 
         
 
-    context={'items':items,'order':order}
+    context={'items':items,'order':order,'address':address}
     return render(request,'store/cart.html',context)
 
 #  ? CHECKOUT
@@ -67,7 +71,7 @@ def build_checkout_session(customer):
         
         mode='payment',
         success_url='http://127.0.0.1:8000/SUCCESS/?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url='http://127.0.0.1:8000/'
+        cancel_url='http://127.0.0.1:8000/cart'
         )
     return session
 # Load Stripe Checkout
@@ -75,10 +79,48 @@ def checkout(request):
     session = build_checkout_session(customer = request.user.customer)
     return render(request, 'store/checkout.html', {'session_id': session.id})
 
-
-# ?SUCCESS PAGE AFTER PAYMENT
+# SUCCESS PAGE AFTER PAYMENT
 def success(request):
     return render(request,'store/success.html')
+
+# ? ADD SHIPPING ADDRESS
+# If not address found:
+class ShippingCreateView(CreateView):
+    model = ShippingAddress
+    template_name = "store/shipping.html"
+    fields=[
+        'first_name',
+        'last_name',
+        'address',
+        'city',
+        'postcode'
+    ]
+    def form_valid(self,form):
+        form.instance.customer=self.request.user.customer
+        form.instance.order=Order.objects.get(customer=self.request.user.customer)
+        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse('checkout')
+
+# If user has address set:
+class ShippingUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+    model = ShippingAddress
+    template_name = "store/shipping.html"
+    fields=[
+        'first_name',
+        'last_name',
+        'address',
+        'city',
+        'postcode'
+    ]
+    def test_func(self):
+        address=self.get_object()
+        if get_object_or_404(Customer,user=self.request.user) == address.customer:
+            return True
+        else:
+            return False
+    def get_success_url(self):
+        return reverse('checkout')
 
 
 # ? Filter Products by Category

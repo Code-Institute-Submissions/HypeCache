@@ -7,7 +7,10 @@
 <div class="row detail">
     <div class="col-4 detail_img">
 
-        {% if user.is_staff %}
+        {% if user.is_staff  %}
+        {% if not product.for_sale %}
+        <h3 class="text-danger">NOT for sale</h3>
+        {% endif %}
         <div>
             <a class="btn btn-outline-info btn-sm mb-3" href="{%url 'product-update' object.id%}">Update</a>
             <a class="btn btn-outline-danger btn-sm mb-3" href="{%url 'product-delete' object.id%}">Delete</a>

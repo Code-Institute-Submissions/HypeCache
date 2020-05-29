@@ -70,13 +70,17 @@
     <!--? ENDS HERE -->
     <!--? Payment Section  -->
     <div class="col-3 payment_col ml-5">
-        <h3 class=" text-center">Payment</h3>
+        <h3 class=" text-center">Shipping</h3>
         <div class="row">
-            <a href="{% url 'checkout' %}" id="stripe" class="col-10 offset-1 bg-secondary"></a>
+
+            {% if not address == None %}
+            <a href="{% url 'shipping-update' address.pk %}" class="col-10 offset-1 btn btn-success mt-2 mb-3">Confirm Address</a>
+            {% else %}
+            <a href="{% url 'shipping-create' %}" class="col-10 offset-1 btn btn-success mt-2 mb-3">Add an Address</a>
+            {% endif %}
+
         </div>
-        <div class="row">
-            <div class="col-10 offset-1 bg-secondary"></div>
-        </div>
+
         <div class="row">
             <div class="col-5 offset-1">
                 <p>Items</p>

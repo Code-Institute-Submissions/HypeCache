@@ -26,6 +26,8 @@ from store.views import (
     ProductDeleteView,
     ProductListView,
     FilterListView,
+    ShippingCreateView,
+    ShippingUpdateView,
     )
 from django.contrib.admin.views.decorators import staff_member_required
 from users import views as user_views 
@@ -46,6 +48,8 @@ urlpatterns = [
     path('update_item/',store_views.updateItem,name='update_item'),
     path('search/<str:category>/', FilterListView.as_view() ,name='product-filter'),
     path('cart/', store_views.cart ,name='cart'),
+    path('shipping/',ShippingCreateView.as_view(),name='shipping-create'),
+    path('shipping/<int:pk>/update/',ShippingUpdateView.as_view(),name='shipping-update'),
     path('checkout/', store_views.checkout,name='checkout'),
     path('SUCCESS/',store_views.success, name='success'),
 
