@@ -33,20 +33,34 @@
 
         {% for item in items %}
         <div class="row">
-            <div class="col-6 pl-0 pr-0 border-bottom border-dark">
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark">
+                <div class=" quantity_buttons">
+                    <button class="btn btn-outline-danger update-cart" data-product="{{item.product.id}}" data-action="remove">-</button>
+                </div>
+            </div>
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark">
+                <div class=" quantity_buttons">
+                    <button class="btn btn-outline-success update-cart" data-product="{{item.product.id}}" data-action="add">+</button>
+                </div>
+            </div>
+            <div class="col-4 pl-0 pr-0 border-bottom border-dark">
                 <h5>{{item.product.name}}</h5>
             </div>
             <div class="col-2 pl-0 pr-0 border-bottom border-dark">
                 <h5 class="align-middle">{{item.product.size}}</h5>
             </div>
             <div class="col-2 pl-0 pr-0 border-bottom border-dark">
-                <h5>{{item.get_total|floatformat:2}}</h5>
+                <h5>{{item.get_total.amount}}</h5>
             </div>
             <div class="col-1 pl-0 pr-0 cart_quantity border-bottom border-dark">
-                <input type="number" name="user_quantity" id="user_quantity" min='1' max='' value="{{item.quantity}}">
+                <h5> {{item.quantity}}</h5>
+
+
+
+
             </div>
-            <div class="col-1 pl-0 pr-0 border-bottom border-dark">
-                <h5 class="text-danger">x</h5>
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark cart_remove">
+                <button class="btn-outline-danger btn">x</button>
             </div>
         </div>
 
@@ -55,11 +69,10 @@
     </div>
     <!--? ENDS HERE -->
     <!--? Payment Section  -->
-    <!-- ! Dummy Info, Must be changed -->
     <div class="col-3 payment_col ml-5">
         <h3 class=" text-center">Payment</h3>
         <div class="row">
-            <div class="col-10 offset-1 bg-secondary"></div>
+            <a href="{% url 'checkout' %}" id="stripe" class="col-10 offset-1 bg-secondary"></a>
         </div>
         <div class="row">
             <div class="col-10 offset-1 bg-secondary"></div>
@@ -77,7 +90,7 @@
                 <p>{{order.get_cart_items}}</p>
             </div>
             <div class="col-5 text-right">
-                <p>{{order.get_cart_total|floatformat:2}} GBP</p>
+                <p>{{order.get_cart_total.amount}} GBP</p>
             </div>
         </div>
 
@@ -85,7 +98,5 @@
     </div>
 
 </div>
-
-
 
 {% endblock content %}

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from djmoney.models.fields import MoneyField
 from PIL import Image
 # Create your models here.
 
@@ -28,7 +29,7 @@ class Product(models.Model):
     category=models.CharField(null=True,choices=CATEGORY_CODE,max_length=10)
     brand= models.CharField(max_length=200, null=True,blank=True)
     description =models.TextField(null=True,blank=True)
-    price = models.FloatField()
+    price = MoneyField(decimal_places=2,default_currency='GBP',max_digits=11)
     size=models.CharField(max_length=200, null=True,blank=True)
     date_posted=models.DateTimeField(default=timezone.now)
     colour=models.CharField(max_length=200, null=True,blank=True)

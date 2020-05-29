@@ -153,7 +153,7 @@ article.wrapper{
 }
 
 /* ?SEARCH BAR  */
-.filter input[type=text] {
+.searchBox input {
     padding: 10px 150px 10px 10px;
     border: none;
     margin-top: 8px;
@@ -189,6 +189,7 @@ margin-bottom: 0%;
 
 .detail_info{
     text-align: center;
+    border-bottom: none;
 }
 .detail_info h2{
     font-weight: 300;
@@ -202,7 +203,7 @@ margin-bottom: 0%;
     letter-spacing: 0.155em;
     margin-bottom: 0.5vh;
 }
-.detail_info,.cart_quantity input{
+.detail_info input{
     padding: 10px 10px 10px 10px;
     width: 35px;
     border: none;
@@ -225,13 +226,13 @@ font-weight: 300;
 font-size: 18px;
 }
 /* ?remove arrows Chrome, Safari, Edge, Opera */
-.detail_info,.cart_quantity input::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 /* ? Remove arrows Firefox */
-.detail_info,.cart_quantity input[type=number] {
+input[type=number] {
     -moz-appearance: textfield;
 }
 
@@ -260,9 +261,16 @@ input::-webkit-inner-spin-button {
 .cart_quantity{
     text-align: center;
 }
-.cart_quantity input{
-    transform: translateY(40%);
+
+.quantity_buttons {
+    line-height: 8vh;
 }
+
+.cart_remove{
+    text-align: center;
+    line-height: 8vh;
+}
+
 
 /* ? Payment Area */
 .cart_row .bg-secondary{

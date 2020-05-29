@@ -12,7 +12,10 @@
         crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://use.fontawesome.com/028008e982.js"></script>
     <link rel="stylesheet" href="{% static 'store/main.css' %}">
+
 
     <style>
         .banner {
@@ -34,7 +37,7 @@
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="{% url 'product-create' %}" class="nav-link nav_text">new post</a>
             <a href="{%url 'profile'%}" class="nav-link nav_text">profile</a>
-            <a href="{%url 'cart'%}" class="nav-link nav_text">cart()</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
             </a>
@@ -44,7 +47,7 @@
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="" class="nav-link nav_text">sell with us</a>
             <a href="{%url 'profile'%}" class="nav-link nav_text">profile</a>
-            <a href="{%url 'cart'%}" class="nav-link nav_text">cart()</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
             </a>
@@ -52,10 +55,10 @@
 
         {% else %}
         <nav class="fixed-top wrapper">
-            <div class="{%url 'home'%}"><a href="" class="nav-link nav_text">home</a></div>
+            <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <div class=""></div>
-            <div class=""><a href="{%url 'login'%}" class="nav-link nav_text ">login</a></div>
-            <div class=""> <a href="{%url 'cart'%}" class="nav-link nav_text ">Cart(1)</a></div>
+            <a href="{%url 'login'%}" class="nav-link nav_text">login</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
 
         </nav>
         {% endif %}
@@ -91,6 +94,28 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'store/js/cart.js' %}"></script>
+
+    <script>
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+    </script>
 
     <script>
         $(document).ready(function () {

@@ -43,8 +43,11 @@ urlpatterns = [
     path('product/<int:pk>/update/', ProductUpdateView.as_view(), name='product-update'),
     path('product/<int:pk>/delete/', ProductDeleteView.as_view(), name='product-delete'),
 
+    path('update_item/',store_views.updateItem,name='update_item'),
     path('search/<str:category>/', FilterListView.as_view() ,name='product-filter'),
     path('cart/', store_views.cart ,name='cart'),
+    path('checkout/', store_views.checkout,name='checkout'),
+    path('SUCCESS/',store_views.success, name='success'),
 
     # ? USERS
     path('register/', user_views.register,name='register'),
