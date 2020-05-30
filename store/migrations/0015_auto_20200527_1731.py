@@ -6,17 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('store', '0014_auto_20200527_1424'),
+        ("store", "0014_auto_20200527_1424"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='customer',
-            old_name='first_name',
-            new_name='name',
+            model_name="customer", old_name="first_name", new_name="name",
         ),
-        migrations.RemoveField(
-            model_name='customer',
-            name='last_name',
-        ),
+        migrations.RemoveField(model_name="customer", name="last_name",),
     ]

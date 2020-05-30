@@ -4,17 +4,17 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class UserRegisterForm(UserCreationForm):
-    email=forms.EmailField()
+    email = forms.EmailField()
 
     class Meta:
-        model=User
-        fields=['username','email','password1','password2']
+        model = User
+        fields = ["username", "email", "password1", "password2"]
 
 
-#? Update our Username and Email
+# ? Update our Username and Email
 class UserUpdateForm(forms.ModelForm):
-    email=forms.EmailField()
+    email = forms.EmailField()
 
     class Meta:
-        model=User
-        fields=['username','email']
+        model = User
+        fields = ["username", "email"]

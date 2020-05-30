@@ -21,9 +21,9 @@
         <img src="{% static 'store/images/skateboard.png' %}" alt="">
     </a>
     <!-- ?Search Bar -->
-    <div class="searchBox">
-        <input class="searchInput" type="text" name="" placeholder="Search...">
-    </div>
+    <form class="searchBox" method="GET">
+        <input class="searchInput" type="search" name="search" placeholder="Search...">
+    </form>
 
 </div>
 <!-- ? Product For Loop -->
@@ -58,7 +58,6 @@
     </div>
     {% endif %}
     {% endfor %}
-
 </article>
 
 <div class="text-center mt-5 mb-5 d-none loading">

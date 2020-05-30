@@ -15,23 +15,60 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, null=True)),
-                ('condition', models.CharField(choices=[('N', 'New'), ('LN', 'Like New'), ('ND', 'New (With Defects'), ('VG', 'Very Good'), ('G', 'Good'), ('Used', 'Heavily Used')], max_length=3, null=True)),
-                ('brand', models.CharField(blank=True, max_length=200, null=True)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('price', models.FloatField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, null=True)),
+                (
+                    "condition",
+                    models.CharField(
+                        choices=[
+                            ("N", "New"),
+                            ("LN", "Like New"),
+                            ("ND", "New (With Defects"),
+                            ("VG", "Very Good"),
+                            ("G", "Good"),
+                            ("Used", "Heavily Used"),
+                        ],
+                        max_length=3,
+                        null=True,
+                    ),
+                ),
+                ("brand", models.CharField(blank=True, max_length=200, null=True)),
+                ("description", models.TextField(blank=True, null=True)),
+                ("price", models.FloatField()),
             ],
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200, null=True)),
-                ('email', models.CharField(max_length=200, null=True)),
-                ('user', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, null=True)),
+                ("email", models.CharField(max_length=200, null=True)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

@@ -6,11 +6,9 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_remove_profile_image'),
+        ("users", "0002_remove_profile_image"),
     ]
 
     operations = [
-        migrations.DeleteModel(
-            name='Profile',
-        ),
+        migrations.DeleteModel(name="Profile",),
     ]

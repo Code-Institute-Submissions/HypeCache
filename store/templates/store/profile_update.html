@@ -1,0 +1,22 @@
+{% extends 'store/base.html' %}
+{%load crispy_forms_tags%}
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+
+<div class="content-section">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Update Your Email:</legend>
+            {{form | crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Update</button>
+            <a href="{% url 'profile' %}" class="btn btn-outline-danger">Cancel</a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock content %}

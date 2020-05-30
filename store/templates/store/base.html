@@ -38,9 +38,11 @@
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="{% url 'product-create' %}" class="nav-link nav_text">new post</a>
             <div>
-                <h2>Staff - {{user.username}}</h2>
+                <h4>Staff - <a class="text-info" href="{% url 'profile' %}"><u>{{user.username}}</u></a></h4>
             </div>
-            <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">
+                <img src="{% static 'store/images/cart.png' %}" alt="">
+            </a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
             </a>
@@ -50,9 +52,11 @@
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
             <a href="" class="nav-link nav_text">sell with us</a>
             <div>
-                <h2>Welcome, {{user.username}}</h2>
+                <h4>Welcome, <a class="text-info" href="{% url 'profile' %}"><u>{{user.username}}</u></a></h4>
             </div>
-            <a href="{%url 'cart'%}" class="nav-link nav_text">cart</a>
+            <a href="{%url 'cart'%}" class="nav-link nav_text">
+                <img src="{% static 'store/images/cart.png' %}" alt="">
+            </a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
                 <img src="{% static 'store/images/logout.png' %}" alt="">
             </a>

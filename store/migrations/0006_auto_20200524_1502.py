@@ -6,23 +6,44 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('store', '0005_product_image'),
+        ("store", "0005_product_image"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='catagory',
-            field=models.CharField(choices=[('LOW', 'Bottoms'), ('HIGH', 'Tops'), ('OUT', 'Outerwear'), ('SHOE', 'Shoes'), ('MISC', 'Accessories and Misc')], max_length=5, null=True),
+            model_name="product",
+            name="catagory",
+            field=models.CharField(
+                choices=[
+                    ("LOW", "Bottoms"),
+                    ("HIGH", "Tops"),
+                    ("OUT", "Outerwear"),
+                    ("SHOE", "Shoes"),
+                    ("MISC", "Accessories and Misc"),
+                ],
+                max_length=5,
+                null=True,
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='size',
+            model_name="product",
+            name="size",
             field=models.CharField(blank=True, max_length=200, null=True),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='condition',
-            field=models.CharField(choices=[('N', 'New'), ('LN', 'Like New'), ('ND', 'New (With Defects'), ('VG', 'Very Good'), ('G', 'Good'), ('USE', 'Heavily Used')], max_length=5, null=True),
+            model_name="product",
+            name="condition",
+            field=models.CharField(
+                choices=[
+                    ("N", "New"),
+                    ("LN", "Like New"),
+                    ("ND", "New (With Defects"),
+                    ("VG", "Very Good"),
+                    ("G", "Good"),
+                    ("USE", "Heavily Used"),
+                ],
+                max_length=5,
+                null=True,
+            ),
         ),
     ]
