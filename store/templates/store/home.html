@@ -27,10 +27,10 @@
 
 </div>
 <!-- ? Product For Loop -->
-<article class="wrapper">
+<article class="wrapper infinite-container">
     {% for product in products  %}
     {% if product.for_sale or user.is_staff %}
-    <div class="product_card img_container">
+    <div class="product_card img_container infinite-item">
 
         <a href="{% url 'product-detail' product.id %}">
 
@@ -61,12 +61,26 @@
 
 </article>
 
-<div class="row ">
-    <div class="col-12 text-center mt-5 mb-5">
-        <button class="btn btn-outline-dark btn-lg">
-            VIEW MORE
-        </button>
-    </div>
+<div class="text-center mt-5 mb-5 d-none loading">
+    Loading...
 </div>
 
+{% if page_obj.has_next %}
+<a class="infinite-more-link" href="?page={{page_obj.next_page_number}}">More</a>
+{% endif %}
+<div class="mt-5 mb-5"></div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="{% static 'store/waypoints/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'store/waypoints/infinite.min.js' %}"></script>
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        onBeforePageLoad: function () {
+            $('.loading').show();
+        },
+        onAfterPageLoad: function ($items) {
+            $('.loading').hide();
+        }
+    });
+</script>
 {% endblock content %}

@@ -54,12 +54,8 @@
             </div>
             <div class="col-1 pl-0 pr-0 cart_quantity border-bottom border-dark">
                 <h5> {{item.quantity}}</h5>
-
-
-
-
             </div>
-            <div class="col-1 pl-0 pr-0 border-bottom border-dark cart_remove">
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark cart_remove update-cart" data-product="{{item.product.id}}" data-action="delete">
                 <button class="btn-outline-danger btn">x</button>
             </div>
         </div>
@@ -73,12 +69,14 @@
         <h3 class=" text-center">Shipping</h3>
         <div class="row">
 
-            {% if not address == None %}
-            <a href="{% url 'shipping-update' address.pk %}" class="col-10 offset-1 btn btn-success mt-2 mb-3">Confirm Address</a>
-            {% else %}
-            <a href="{% url 'shipping-create' %}" class="col-10 offset-1 btn btn-success mt-2 mb-3">Add an Address</a>
-            {% endif %}
 
+            {% if not address == None and items %}
+            <a href="{% url 'shipping-update' address.pk %}" class="col-10 offset-1 btn btn-success mt-2 mb-3">Confirm Address</a>
+            {% elif address == None and items %}
+            <a href="{% url 'shipping-create' %}" class="col-10 offset-1 btn btn-success mt-2 mb-3">Add an Address</a>
+            {% elif not items %}
+            <a href="{% url 'home' %}" class="col-10 offset-1 btn btn-warning mt-2 mb-3">Add some items!</a>
+            {% endif %}
         </div>
 
         <div class="row">

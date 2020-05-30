@@ -55,7 +55,8 @@ class Product(models.Model):
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
     name  = models.CharField(max_length=200,null=True)
-    email  = models.CharField(max_length=200,null=True)
+    email  = models.EmailField(max_length=254,null=True)
+    stripe_id= models.CharField(max_length=200,null=True,blank=True)
 
     def __str__(self):
         return self.name
@@ -64,7 +65,10 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True,null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     confirmed = models.BooleanField(default=False,null=True,blank=True)
-    transaction_id = models.CharField(max_length=200, null=True)
+    transaction_id = models.CharField(max_length=200, null=True, blank=True)
+
+    class Meta:
+        get_latest_by = 'date_ordered'
 
     def __str__(self):
         return str(self.id)

@@ -1,5 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.core.mail import send_mail
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+
 from django.views.generic import (
     ListView,
     DetailView,
@@ -8,11 +13,12 @@ from django.views.generic import (
     DeleteView
     )
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from hypecache.settings import STRIPE_SECRET
+from hypecache.settings import STRIPE_SECRET,ENDPOINT_SECRET
 from .models import *
 import json
 import stripe
 stripe.api_key=STRIPE_SECRET
+endpoint_secret =ENDPOINT_SECRET
 
 # Create your views here.
 # ? HOME View
@@ -21,10 +27,12 @@ class ProductListView(ListView):
     template_name = "store/home.html"
     context_object_name='products'
     ordering = ['-date_posted']
+    paginate_by=6
 
 # ? CART View
+# !remove auth user logic
+@login_required
 def cart(request):
-
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created=Order.objects.get_or_create(customer=customer, confirmed=False)
@@ -45,7 +53,9 @@ def cart(request):
 #  ? CHECKOUT
 # Create checkout session
 def build_checkout_session(customer):
-    order = Order.objects.get(customer=customer)
+    order = Order.objects.get(customer=customer,confirmed=False)
+    customer_email=customer.email
+    customer_stripe=customer.stripe_id
     items = order.orderitem_set.all()
     prices =[]
     for item in items:
@@ -64,8 +74,13 @@ def build_checkout_session(customer):
     for item, price in zip(items,prices):
             line_items.append({'price':price,'quantity':item.quantity}),
 
+    if customer_stripe != '':
+        customer_email=None
+
+
     session = stripe.checkout.Session.create(
-        customer_email=customer.email,
+        customer_email=customer_email,
+        customer=customer_stripe,
         payment_method_types=['card'],
         line_items=line_items,
         
@@ -74,18 +89,21 @@ def build_checkout_session(customer):
         cancel_url='http://127.0.0.1:8000/cart'
         )
     return session
+
 # Load Stripe Checkout
 def checkout(request):
     session = build_checkout_session(customer = request.user.customer)
     return render(request, 'store/checkout.html', {'session_id': session.id})
 
 # SUCCESS PAGE AFTER PAYMENT
+@login_required
 def success(request):
     return render(request,'store/success.html')
 
 # ? ADD SHIPPING ADDRESS
 # If not address found:
-class ShippingCreateView(CreateView):
+
+class ShippingCreateView(LoginRequiredMixin,CreateView):
     model = ShippingAddress
     template_name = "store/shipping.html"
     fields=[
@@ -103,6 +121,7 @@ class ShippingCreateView(CreateView):
         return reverse('checkout')
 
 # If user has address set:
+
 class ShippingUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     model = ShippingAddress
     template_name = "store/shipping.html"
@@ -140,7 +159,7 @@ class ProductDetailView(DetailView):
 
 
 #? Create Store Post for staff only
-class ProductCreateView(CreateView):
+class ProductCreateView(UserPassesTestMixin , CreateView):
     model = Product
     fields=[
         'name',
@@ -155,6 +174,11 @@ class ProductCreateView(CreateView):
         'in_stock',
         'for_sale'
     ]
+    def test_func(self):
+        if self.request.user.is_staff:
+            return True
+        else:
+            return False
 
     #? Update Posts
 class ProductUpdateView(
@@ -197,6 +221,7 @@ class ProductDeleteView(
             return True
         return False
 
+@login_required
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -214,10 +239,9 @@ def updateItem(request):
         orderItem.quantity = (orderItem.quantity +1)
     elif action=='remove':
         orderItem.quantity = (orderItem.quantity -1) 
-    elif action=='cart_input':
-        orderItem.quantity = (orderItem.quantity- value )
-    # elif action=='delete':
-    #     orderItem.delete()
+    elif action=='delete':
+        orderItem.quantity = (orderItem.quantity -orderItem.quantity) 
+
 
     orderItem.save()
 
@@ -225,3 +249,46 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+# ? WEBHOOK
+@require_http_methods(["POST"])
+@csrf_exempt
+def receive_webhook(request):
+    payload = request.body
+    event = None
+
+    try:
+        event = stripe.Event.construct_from(
+        json.loads(payload), stripe.api_key
+        )
+    except ValueError as e:
+    # Invalid payload
+        return HttpResponse(status=400)
+
+    # Handle the event
+    if event.type == 'charge.succeeded':
+        stripe_charge = event.data.object 
+        cust_email=stripe_charge.billing_details.email
+        cust_id = stripe_charge.customer
+        receipt_url=stripe_charge.receipt_url
+        customer = Customer.objects.get(email=cust_email)
+        order=Order.objects.get(customer=customer, confirmed=False)
+        order.confirmed = True
+        order.save()
+        if customer.stripe_id=='':
+            customer.stripe_id = cust_id
+        customer.save()
+
+        # send_mail(
+        #     'HypeCache - Thank you for your order!',
+        #     receipt_url,
+        #     'donotreply@hypecache.com',
+        #     [cust_email],
+        #     fail_silently=False,
+        # )
+
+    else:
+    # Unexpected event type
+        return HttpResponse(status=400)
+
+    return HttpResponse(status=200)

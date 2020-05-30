@@ -53,6 +53,8 @@ urlpatterns = [
     path('checkout/', store_views.checkout,name='checkout'),
     path('SUCCESS/',store_views.success, name='success'),
 
+    path('webhook/', store_views.receive_webhook),
+
     # ? USERS
     path('register/', user_views.register,name='register'),
     path('profile/', user_views.profile,name='profile'),
@@ -74,6 +76,9 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='users/password_reset_complete.html'),
         name='password_reset_complete'),
+
+    
+
 
         # ? Images with Pillow
         # !Not for use in production
