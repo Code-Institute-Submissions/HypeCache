@@ -1,1 +1,1 @@
-web: gunicorn hypecache.wsgi
+web: gunicorn hypecache.wsgi --log-file -
