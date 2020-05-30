@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import (
     ListView,
     DetailView,
@@ -74,7 +74,7 @@ def build_checkout_session(customer):
     for item, price in zip(items,prices):
             line_items.append({'price':price,'quantity':item.quantity}),
 
-    if customer_stripe != '':
+    if customer_stripe:
         customer_email=None
 
 
@@ -274,11 +274,12 @@ def receive_webhook(request):
         customer = Customer.objects.get(email=cust_email)
         order=Order.objects.get(customer=customer, confirmed=False)
         order.confirmed = True
+        order.transaction_id=stripe_charge.payment_intent
         order.save()
-        if customer.stripe_id=='':
+        if not customer.stripe_id:
             customer.stripe_id = cust_id
+        
         customer.save()
-
         # send_mail(
         #     'HypeCache - Thank you for your order!',
         #     receipt_url,
