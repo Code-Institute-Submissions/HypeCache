@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail, BadHeaderError
 from django.db.models import Q
 from django.views.generic import (
     ListView,
@@ -13,9 +14,11 @@ from django.views.generic import (
     DeleteView,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib import messages
 from hypecache.settings import STRIPE_SECRET, ENDPOINT_SECRET
 from .models import *
 from .filters import ProductFilter
+from .forms import ContactForm
 import json
 import stripe
 
@@ -172,6 +175,33 @@ def cart(request):
     context = {"items": items, "order": order, "address": address}
     return render(request, "store/cart.html", context)
 
+#? Contact Us
+def contact(request):
+    if request.method =='GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            from_email = form.cleaned_data['from_email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(
+                    subject, 
+                    message, 
+                    from_email, 
+                    ['hypecache@apenguinting.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            messages.success(
+                request, f"Email from {from_email}, sent successfully!"
+            )
+            return redirect('home')
+    return render(request, "store/contact.html", {'form': form})
+
+
+
+
 
 #  ? CHECKOUT
 # Create checkout session
@@ -274,9 +304,9 @@ def updateItem(request):
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
-    if action == "add":
+    if action == "add" and orderItem.quantity <  orderItem.product.in_stock:
         orderItem.quantity = orderItem.quantity + 1
-    elif action == "remove":
+    elif action == "remove" :
         orderItem.quantity = orderItem.quantity - 1
     elif action == "delete":
         orderItem.quantity = orderItem.quantity - orderItem.quantity
@@ -310,6 +340,12 @@ def receive_webhook(request):
         receipt_url = stripe_charge.receipt_url
         customer = Customer.objects.get(email=cust_email)
         order = Order.objects.get(customer=customer, confirmed=False)
+        for item in order.orderitem_set.all():
+            item.product.in_stock = item.product.in_stock - item.quantity
+            product = item.product
+            if item.product.in_stock <=0:
+                item.product.for_sale = False
+            product.save()    
         order.confirmed = True
         order.transaction_id = stripe_charge.payment_intent
         order.receipt = receipt_url

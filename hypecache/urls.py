@@ -53,6 +53,7 @@ urlpatterns = [
     ),
     path("update_item/", store_views.updateItem, name="update_item"),
     path("search/<str:category>/", FilterListView.as_view(), name="product-filter"),
+    path("contact/",store_views.contact,name="contact"),
     path("cart/", store_views.cart, name="cart"),
     path("shipping/", ShippingCreateView.as_view(), name="shipping-create"),
     path(

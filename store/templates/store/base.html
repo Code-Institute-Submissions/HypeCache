@@ -50,7 +50,7 @@
         {% elif user.is_authenticated %}
         <nav class="fixed-top wrapper_auth">
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
-            <a href="" class="nav-link nav_text">sell with us</a>
+            <a href="{%url 'contact'%}" class="nav-link nav_text">contact us</a>
             <div>
                 <h4>Welcome, <a class="text-info" href="{% url 'profile' %}"><u>{{user.username}}</u></a></h4>
             </div>
@@ -65,7 +65,7 @@
         {% else %}
         <nav class="fixed-top wrapper">
             <a href="{%url 'home'%}" class="nav-link nav_text ">home</a>
-            <div class=""></div>
+            <a href="{%url 'contact'%}" class="nav-link nav_text">contact us</a>
             <div></div>
             <a href="{%url 'login'%}" class="nav-link nav_text">login</a>
 
