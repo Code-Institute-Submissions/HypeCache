@@ -41,10 +41,10 @@
                 <h4>Staff - <a class="text-info" href="{% url 'profile' %}"><u>{{user.username}}</u></a></h4>
             </div>
             <a href="{%url 'cart'%}" class="nav-link nav_text">
-                <img src="{% static 'store/images/cart.png' %}" alt="">
+                <img class="img-fluid" src="{% static 'store/images/cart.png' %}" alt="">
             </a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
-                <img src="{% static 'store/images/logout.png' %}" alt="">
+                <img class="img-fluid" src="{% static 'store/images/logout.png' %}" alt="">
             </a>
         </nav>
         {% elif user.is_authenticated %}
@@ -55,10 +55,10 @@
                 <h4>Welcome, <a class="text-info" href="{% url 'profile' %}"><u>{{user.username}}</u></a></h4>
             </div>
             <a href="{%url 'cart'%}" class="nav-link nav_text">
-                <img src="{% static 'store/images/cart.png' %}" alt="">
+                <img class="img-fluid" src="{% static 'store/images/cart.png' %}" alt="">
             </a>
             <a href="{%url 'logout'%}" class="nav-link nav_text">
-                <img src="{% static 'store/images/logout.png' %}" alt="">
+                <img class="img-fluid" src="{% static 'store/images/logout.png' %}" alt="">
             </a>
         </nav>
 
@@ -78,7 +78,7 @@
         <div class="banner">
             {% if messages %}
             {% for message in messages %}
-            <div class="col-3 alert alert-{{message.tags}}" role="alert">
+            <div class="col-12 col-md-3 alert alert-{{message.tags}}" role="alert">
                 {{message}}
             </div>
             {% endfor %}

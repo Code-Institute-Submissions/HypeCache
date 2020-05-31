@@ -21,12 +21,19 @@
             <div class="card card-body text-center">
                 <p>OrderID:<br>{{order.transaction_id}}</p>
                 <p>customer name:<br>{{order.customer.name}}</p>
+
+                {% if user.is_superuser %}
                 <p>customer id:<br>{{order.customer.stripe_id}}</p>
+                {% endif %}
                 <p>customer email:<br>{{order.customer.email}}</p>
                 <p>Date:<br>{{order.date_ordered}}</p>
                 <p>Order Items:<br>{{order.get_cart_items}}</p>
                 <p>Total Order Price:<br>£{{order.get_cart_total.amount}}</p>
-                <p>Items: {{order.orderitem_set.all}}</p>
+                <p>Items: </p>
+                {%for item in order.orderitem_set.all%}
+                {{item}} <br>
+                £{{item.product.price.amount}} <br class="mb-3">
+                {% endfor %}
                 <a href="{{order.receipt}}" target="_blank">receipt</a>
             </div>
 

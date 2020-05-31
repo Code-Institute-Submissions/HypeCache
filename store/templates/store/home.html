@@ -6,22 +6,22 @@
 <!-- ? Filter -->
 <div class="filter border-top border-bottom row">
     <a href="{% url 'product-filter' 'lower' %}">
-        <img src="{% static 'store/images/bottoms.png' %}" alt="">
+        <img class="img-fluid" src="{% static 'store/images/bottoms.png' %}" alt="">
     </a>
     <a href="{% url 'product-filter' 'outerwear' %}">
-        <img src="{% static 'store/images/outerwear.png' %}" alt="">
+        <img class="img-fluid" src="{% static 'store/images/outerwear.png' %}" alt="">
     </a>
     <a href="{% url 'product-filter' 'tops' %}">
-        <img src="{% static 'store/images/tshirt.png' %}" alt="">
+        <img class="img-fluid" src="{% static 'store/images/tshirt.png' %}" alt="">
     </a>
     <a href="{% url 'product-filter' 'shoes' %}">
-        <img src="{% static 'store/images/shoes.png' %}" alt="">
+        <img class="img-fluid" src="{% static 'store/images/shoes.png' %}" alt="">
     </a>
     <a href="  {% url 'product-filter' 'misc' %}">
-        <img src="{% static 'store/images/skateboard.png' %}" alt="">
+        <img class="img-fluid" src="{% static 'store/images/skateboard.png' %}" alt="">
     </a>
     <!-- ?Search Bar -->
-    <form class="searchBox" method="GET">
+    <form class="searchBox d-none d-lg-block" method="GET">
         <input class="searchInput" type="search" name="search" placeholder="Search...">
     </form>
 

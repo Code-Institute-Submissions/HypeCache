@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="row detail">
-    <div class="col-4 detail_img">
+    <div class="col-12 col-md-4 detail_img">
 
         {% if user.is_staff  %}
         {% if not product.for_sale %}
@@ -22,10 +22,10 @@
         </div>
         <p>colour: {{product.colour}}</p>
         <p>brand: {{product.brand}}</p>
-        <p>size: {{product.size}}</p>
+        <p class="mb-3">size: {{product.size}}</p>
     </div>
 
-    <div class="col-8 detail_info">
+    <div class="col-sm-12 col-lg-8 detail_info">
         <p>({{product.get_condition_display}})</p>
         <h2>{{product.name}}</h2>
         <h2>£{{product.price.amount}}</h3>

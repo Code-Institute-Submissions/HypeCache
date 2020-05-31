@@ -5,26 +5,26 @@
 {% block content %}
 
 <div class="row cart_row">
-    <div class="col-8">
+    <div class="col-12 col-md-8">
         <h2 class="m-3 mb-4">Cart</h2>
         <div class="row">
-            <div class="col-6 pl-0 pr-0">
+            <div class="col-3 col-md-6 pl-0 pr-0">
                 <h4>Item</h4>
                 <div class="border-bottom border-dark"></div>
             </div>
-            <div class="col-2 pl-0 pr-0">
+            <div class="col-2 col-md-2 pl-0 pr-0">
                 <h4>Size</h4>
                 <div class="border-bottom border-dark"></div>
             </div>
-            <div class="col-2 pl-0 pr-0">
-                <h4>Total Price</h4>
+            <div class="col-3 col-md-2 pl-0 pr-0">
+                <h4>Total</h4>
                 <div class="border-bottom border-dark"></div>
             </div>
-            <div class="col-1 pl-0 pr-0">
+            <div class="col-2 col-md-1 pl-0 pr-0">
                 <h4>QTY.</h4>
                 <div class="border-bottom border-dark"></div>
             </div>
-            <div class="col-1 pl-0 pr-0">
+            <div class="col-2 col-md-1 pl-0 pr-0">
                 <h4>Remove</h4>
                 <div class="border-bottom border-dark"></div>
             </div>
@@ -33,29 +33,29 @@
 
         {% for item in items %}
         <div class="row">
-            <div class="col-1 pl-0 pr-0 border-bottom border-dark">
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark d-none d-sm-block">
                 <div class=" quantity_buttons">
                     <button class="btn btn-outline-danger update-cart" data-product="{{item.product.id}}" data-action="remove">-</button>
                 </div>
             </div>
-            <div class="col-1 pl-0 pr-0 border-bottom border-dark">
+            <div class="col-1 pl-0 pr-0 border-bottom border-dark d-none d-sm-block">
                 <div class=" quantity_buttons">
                     <button class="btn btn-outline-success update-cart" data-product="{{item.product.id}}" data-action="add">+</button>
                 </div>
             </div>
-            <div class="col-4 pl-0 pr-0 border-bottom border-dark">
+            <div class="col-3 col-md-4 pl-0 pr-0 border-bottom border-dark">
                 <h5>{{item.product.name}}</h5>
             </div>
             <div class="col-2 pl-0 pr-0 border-bottom border-dark">
                 <h5 class="align-middle">{{item.product.size}}</h5>
             </div>
-            <div class="col-2 pl-0 pr-0 border-bottom border-dark">
+            <div class="col-3 col-md-2 pl-0 pr-0 border-bottom border-dark">
                 <h5>{{item.get_total.amount}}</h5>
             </div>
-            <div class="col-1 pl-0 pr-0 cart_quantity border-bottom border-dark">
+            <div class="col-2 col-md-1 pl-0 pr-0 cart_quantity border-bottom border-dark">
                 <h5> {{item.quantity}}</h5>
             </div>
-            <div class="col-1 pl-0 pr-0 border-bottom border-dark cart_remove update-cart" data-product="{{item.product.id}}" data-action="delete">
+            <div class="col-2 col-md-1 pl-0 pr-0 border-bottom border-dark cart_remove update-cart" data-product="{{item.product.id}}" data-action="delete">
                 <button class="btn-outline-danger btn">x</button>
             </div>
         </div>
@@ -65,7 +65,7 @@
     </div>
     <!--? ENDS HERE -->
     <!--? Payment Section  -->
-    <div class="col-3 payment_col ml-5">
+    <div class="col-12 col-md-3 payment_col ">
         <h3 class=" text-center">Shipping</h3>
         <div class="row">
 

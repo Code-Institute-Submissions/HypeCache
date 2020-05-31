@@ -51,7 +51,8 @@ nav a:hover{
     font-family: Oswald;
     font-style: normal;
     font-weight: normal;
-    font-size: 39px;
+     /* ([minimum size] + ([maximum size] - [minimum size]) * ((100vw - [minimum viewport width]) / ([maximum viewport width] - [minimum viewport width] */
+    font-size: calc(13px + (39 - 23) * ((100vw - 300px) / (1600 - 300)));
     line-height: 58px;
     align-items: center;
     text-align: center;
@@ -59,6 +60,12 @@ nav a:hover{
     text-transform: uppercase;
     color: #000000;
     opacity: 0.67;}
+header h4{
+    font-size: calc(13px + (39 - 23) * ((100vw - 300px) / (1600 - 300)));
+}
+header img{
+    min-width: 40px;
+}
 
     /* ?Banner */
     .banner{
@@ -70,7 +77,6 @@ nav a:hover{
         padding-top: 110px;
     }
 
-    /* todo: MAKE FONT RESPONSIVE! (use code from other project) */
     .banner_text h1{
     position: absolute;
     top: 50%;
@@ -79,7 +85,8 @@ nav a:hover{
     color: white;
     letter-spacing: 0.385em;
     font-weight: 500;
-    font-size: 100px;
+    font-size: calc(35px + (100 - 35) * ((100vw - 300px) / (1600 - 300)));
+
     }
     .banner_text{
         opacity: 1;
@@ -279,4 +286,56 @@ input[type=number] {
 }
 .payment_col{
     margin-top: 6vh;
+}
+
+@media (max-width: 1024px){
+    nav.wrapper_auth{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+        grid-template-rows:110px;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.82);
+        }
+        article.wrapper{
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows:300px ;
+            align-items: center;
+            
+            text-align: center;
+        }
+    .nav_text{
+        line-height: unset;
+    }
+    header{
+        height: unset;
+    }
+    .banner{
+        height: 350px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        z-index: -1;
+        padding-top: 110px;
+    }
+    .filter{
+    margin-top: 5vh;
+    display: grid;
+    grid-template-columns: repeat(5,1fr );
+    grid-template-rows: 110px;
+    align-items: center;
+    margin-top: 0px;
+    }
+    .product_card{
+        margin-top: 5vh;
+    }
+    .searchBox input {
+        padding: 10px 150px 10px 10px;
+        border: none;
+        margin-top: 8px;
+        margin-right: 16px;
+        font-size: 17px;
+        border-bottom: 2px solid black;
+        width: 100%;
+    }
 }
