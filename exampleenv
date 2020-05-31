@@ -1,0 +1,12 @@
+import os
+
+os.environ.setdefault('STRIPE_PUBLISHABLE','')
+os.environ.setdefault('STRIPE_SECRET','')
+os.environ.setdefault('EMAIL_HOST_USER','')
+os.environ.setdefault('EMAIL_HOST_PASSWORD','')
+os.environ.setdefault('SECRET_KEY', '')
+os.environ.setdefault('ENDPOINT_SECRET','')
+
+os.environ.setdefault('AWS_ACCESS_KEY_ID','')
+os.environ.setdefault('AWS_SECRET_ACCESS_KEY','')
+os.environ.setdefault('AWS_STORAGE_BUCKET_NAME','')
