@@ -4,7 +4,7 @@ A web-based store that removes that hard-to-get item worry! This site offers lim
 Users can add items to their cart and checkout securely using stripe! No payment information is shared with us!
 
 ## Mockups
-[Link to mockup pdf within repo](../master/static/mockup/mock-ups.pdf)
+[Link to mockup pdf within repo](../HypeCache.pdf)
 
 ## UX
 The homepage brings users straight to the action, giving a filter, a full search bar and all the products they could desire.
@@ -60,6 +60,10 @@ This project uses:
 
 This site is deployed [HERE](https://hypecache.herokuapp.com/) on Heroku.  
 Heroku config variables are used in order to conceal variables used for security.
+
+I have created a test staff user here:
+code : codeinstitute
+This is to allow testing of staff only features, such as posting items for sale.
 
 ## Testing
   * Went through the site with my tutor checking major flaws there could be with the site. For example, checking authentication
