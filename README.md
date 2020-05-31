@@ -49,6 +49,7 @@ the site owner (superuser)can see all orders. You're done! log out and wait for 
 This project uses:
   * HTML 5
   * CSS
+  * Javascript/ Jquery to improve UX. Example: Add to cart and increase .Qty buttons.
   * Python 3.6.6 (heroku)
   * [Bootstrap 4.5](https://getbootstrap.com/) - Used for simple styling and layout.
   * [Django 2.2.12](https://www.djangoproject.com/) - Python web framework.
