@@ -234,8 +234,8 @@ def build_checkout_session(customer):
         payment_method_types=["card"],
         line_items=line_items,
         mode="payment",
-        success_url="http://127.0.0.1:8000/SUCCESS/?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url="http://127.0.0.1:8000/cart",
+        success_url="https://hypecache.herokuapp.com/SUCCESS/?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url="https://hypecache.herokuapp.com/",
     )
     return session
 
