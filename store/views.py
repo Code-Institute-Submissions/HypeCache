@@ -17,7 +17,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from hypecache.settings import STRIPE_SECRET, ENDPOINT_SECRET
 from .models import *
-from .filters import ProductFilter
 from .forms import ContactForm
 import json
 import stripe
