@@ -4,7 +4,7 @@ A web-based store that removes that hard-to-get item worry! This site offers lim
 Users can add items to their cart and checkout securely using stripe! No payment information is shared with us!
 
 ## Mockups
-[Link to mockup pdf within repo](../HypeCache.pdf)
+[Link to mockup pdf within repo](../master/HypeCache.pdf)
 
 ## UX
 The homepage brings users straight to the action, giving a filter, a full search bar and all the products they could desire.
