@@ -41,14 +41,15 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.brand} - {self.name}"
 
-    def save(self):
-        super().save()
-        img = Image.open(self.image.path)
+#? For pillow local file storage/ Not AWS
+    # def save(self):
+    #     super().save()
+    #     img = Image.open(self.image.path)
 
-        if img.height > 600 or img.width > 600:
-            output_size = (600, 600)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+    #     if img.height > 600 or img.width > 600:
+    #         output_size = (600, 600)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)
 
     def get_absolute_url(self):
         return reverse("product-detail", kwargs={"pk": self.pk})
